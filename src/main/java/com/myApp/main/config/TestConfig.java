@@ -49,7 +49,10 @@ public class TestConfig implements CommandLineRunner{
 		Product p2 = new Product( "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", new BigDecimal(2190.0), "");
 		Product p3 = new Product( "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", new BigDecimal(1250.0), "");
 		Product p4 = new Product( "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", new BigDecimal(1200.0), "");
-		Product p5 = new Product( "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", new BigDecimal(100.99), ""); 
+		Product p5 = new Product( 
+				"Rails for Dummies", 
+				"Cras fringilla convallis sem vel faucibus.", 
+				new BigDecimal(100.99), ""); 
 
 		Category c1 = new Category(  "Eletronics");
 		Category c2 = new Category(  "Books");
@@ -65,6 +68,16 @@ public class TestConfig implements CommandLineRunner{
 		this.userRepos.saveAll(Arrays.asList(u1, u2));
 		this.orderRepos.saveAll(Arrays.asList(o1, o2, o3));
 		this.categoryRepos.saveAll(Arrays.asList(c1, c2, c3));
+		this.prodRepos.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		
+		/// Associação entre objetos
+		p1.getCategories().add(c2);
+		p2.getCategories().add(c1);
+		p2.getCategories().add(c3);
+		p3.getCategories().add(c3);
+		p4.getCategories().add(c3);
+		p5.getCategories().add(c2);
+		
 		this.prodRepos.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 	}
 }
