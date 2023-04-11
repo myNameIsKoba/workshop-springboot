@@ -66,9 +66,9 @@ public class TestConfig implements CommandLineRunner{
 		User u1 = new User(  "Maria Brown", "maria@gmail.com", "988888888", "123456");
 		User u2 = new User(  "Alex Green", "alex@gmail.com", "977777777", "123456");
 	
-		Order o1 = new Order(  Instant.now(), OrderStatus.CANCELED, u1);
-		Order o2 = new Order(  Instant.now(), OrderStatus.SHIPPED, u2);
-		Order o3 = new Order(  Instant.now(), OrderStatus.PAID, u2);
+		Order o1 = new Order(  Instant.now(), OrderStatus.PAID, u1);
+		Order o2 = new Order(  Instant.now(), OrderStatus.WAITING_PAYMET, u2);
+		Order o3 = new Order(  Instant.now(), OrderStatus.WAITING_PAYMET, u2);
 		
 		this.userRepos.saveAll(Arrays.asList(u1, u2));
 		this.orderRepos.saveAll(Arrays.asList(o1, o2, o3));
