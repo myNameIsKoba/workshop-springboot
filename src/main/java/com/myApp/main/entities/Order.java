@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.myApp.main.entities.enums.OrderStatus;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,31 +20,55 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "tb_order")
-@Getter
-@Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Order implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Getter
 	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = 
 			"yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+	@Getter
+	@Setter
 	private Instant momento;
 	
 	@ManyToOne //transforma em chave estrangeira
 	@JoinColumn(name = "client_id")
+	@Getter
+	@Setter
 	private User client;
 	
+	private Integer status;
+	
 	public Order(Long id, Instant momento, User client) {
-		super();
 		this.id = id;
 		this.momento = momento;
 		this.client = client;
 	}
+
+	public Order(Long id, Instant momento,  OrderStatus status, User client) {
+		super();
+		this.id = id;
+		this.momento = momento;
+		this.client = client;
+		this.setStatus(status);
+	}
+
+	public OrderStatus getStatus() {
+		return OrderStatus.valueOf(status);
+	}
+
+	public void setStatus(OrderStatus orderstatus) {
+		if (orderstatus != null) {
+			this.status = orderstatus.getCode();
+		}
+	}
+	
+	
 
 }
