@@ -2,6 +2,7 @@ package com.myApp.main.config;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Profile;
 import com.myApp.main.entities.Category;
 import com.myApp.main.entities.Order;
 import com.myApp.main.entities.OrderItem;
+import com.myApp.main.entities.Payments;
 import com.myApp.main.entities.Product;
 import com.myApp.main.entities.User;
 import com.myApp.main.entities.enums.OrderStatus;
@@ -92,5 +94,17 @@ public class TestConfig implements CommandLineRunner{
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPreco()); 
 
 		this.orderIRepos.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		Order o = new Order();
+		o.setMomento(Instant.now());
+		
+		Long hours = 2L;
+		Instant t1 = o.getMomento();
+		Instant t2 = t1.plus(hours, ChronoUnit.HOURS);
+		Payments pa1 = new Payments(null, t2, o1);
+		
+		o1.setPagamento(pa1);
+		
+		this.orderRepos.save(o1);
 	}
 }
