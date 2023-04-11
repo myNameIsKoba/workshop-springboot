@@ -28,7 +28,6 @@ import lombok.Setter;
 public class Product implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@Getter
 	@Id
 	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
