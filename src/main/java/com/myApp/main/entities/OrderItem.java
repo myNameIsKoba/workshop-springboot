@@ -2,6 +2,7 @@ package com.myApp.main.entities;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.myApp.main.entities.pk.OrderItemPrimaryKey;
 
 import jakarta.persistence.EmbeddedId;
@@ -20,7 +21,7 @@ public class OrderItem {
 
 	@EmbeddedId
 	@EqualsAndHashCode.Include
-	private OrderItemPrimaryKey id;
+	private OrderItemPrimaryKey id = new OrderItemPrimaryKey();
 	@Getter
 	@Setter
 	private Integer quantity;
@@ -36,6 +37,7 @@ public class OrderItem {
 		this.id.setProduct(product);
 	}
 	
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
