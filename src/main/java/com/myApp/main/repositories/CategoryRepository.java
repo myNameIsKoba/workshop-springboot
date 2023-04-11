@@ -1,0 +1,9 @@
+package com.myApp.main.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.myApp.main.entities.Category;
+
+public interface CategoryRepository extends JpaRepository<Category, Long>{
+
+}
