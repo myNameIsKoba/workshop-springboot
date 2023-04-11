@@ -44,11 +44,6 @@ public class Order implements Serializable{
 	private User client;
 	
 	private Integer status;
-	
-	public Order( Instant momento, User client) {
-		this.momento = momento;
-		this.client = client;
-	}
 
 	public Order( Instant momento,  OrderStatus status, User client) {
 		super();

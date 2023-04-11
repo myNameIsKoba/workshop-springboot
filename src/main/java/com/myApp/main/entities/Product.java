@@ -1,17 +1,16 @@
 package com.myApp.main.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,20 +18,15 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-/**
- * Entidade de cadeia de bytes -> 'Serializable'
- * @author User
- *
- */
-
 @Entity
-@Table(name = "tb_user")
+@Table(name = "tb_product")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force=true)
 @RequiredArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class User implements Serializable{
+public class Product implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Getter
 	@Id
 	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,17 +38,16 @@ public class User implements Serializable{
 	@NonNull
 	@Getter
 	@Setter
-	private String email;
+	private String descr;
 	@NonNull
 	@Getter
 	@Setter
-	transient private String password;
+	private BigDecimal preco;
 	@NonNull
 	@Getter
 	@Setter
-	private String phone;
+	private String imgUrl;
 	@Getter
-	@JsonIgnore
-	@OneToMany(mappedBy = "client")
-	private List<Order> orders = new ArrayList<>();
+	@Transient
+	private Set<Category> categories = new HashSet<>();
 }

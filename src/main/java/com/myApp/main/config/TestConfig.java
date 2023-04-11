@@ -1,5 +1,6 @@
 package com.myApp.main.config;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Arrays;
 
@@ -10,10 +11,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.myApp.main.entities.Category;
 import com.myApp.main.entities.Order;
+import com.myApp.main.entities.Product;
 import com.myApp.main.entities.User;
 import com.myApp.main.entities.enums.OrderStatus;
 import com.myApp.main.repositories.CategoryRepository;
 import com.myApp.main.repositories.OrderRepository;
+import com.myApp.main.repositories.ProductRepository;
 import com.myApp.main.repositories.UserRepository;
 
 @Configuration
@@ -36,9 +39,18 @@ public class TestConfig implements CommandLineRunner{
 	@Autowired 
 	private CategoryRepository categoryRepos;
 	
+	@Autowired
+	private ProductRepository prodRepos;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
+		Product p1 = new Product( "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", new BigDecimal(90.5), "");
+		Product p2 = new Product( "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", new BigDecimal(2190.0), "");
+		Product p3 = new Product( "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", new BigDecimal(1250.0), "");
+		Product p4 = new Product( "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", new BigDecimal(1200.0), "");
+		Product p5 = new Product( "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", new BigDecimal(100.99), ""); 
+
 		Category c1 = new Category(  "Eletronics");
 		Category c2 = new Category(  "Books");
 		Category c3 = new Category(  "Computers");
@@ -53,5 +65,6 @@ public class TestConfig implements CommandLineRunner{
 		this.userRepos.saveAll(Arrays.asList(u1, u2));
 		this.orderRepos.saveAll(Arrays.asList(o1, o2, o3));
 		this.categoryRepos.saveAll(Arrays.asList(c1, c2, c3));
+		this.prodRepos.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 	}
 }
