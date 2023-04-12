@@ -99,8 +99,7 @@ public class TestConfig implements CommandLineRunner{
 				null, 
 				Instant
 					.now()
-					.plus(2L, ChronoUnit.HOURS), 
-				o1);
+					.plus(2L, ChronoUnit.HOURS), o1);
 		
 		o1.setPagamento(pa1);
 		

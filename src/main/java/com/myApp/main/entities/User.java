@@ -33,6 +33,7 @@ import lombok.Setter;
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Getter
 	@Id
 	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,4 +58,6 @@ public class User implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
+	
+	
 }
