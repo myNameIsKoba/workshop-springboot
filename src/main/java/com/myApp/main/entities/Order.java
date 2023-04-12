@@ -1,6 +1,7 @@
 package com.myApp.main.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,7 +34,7 @@ public class Order implements Serializable{
 	@Id
 	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long id; 
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = 
 			"yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
@@ -75,6 +76,12 @@ public class Order implements Serializable{
 		}
 	}
 	
-	
+	public BigDecimal getTotal() {
+		BigDecimal sum = BigDecimal.ZERO;
+		for (OrderItem x : items) {
+			sum = sum.add(x.subTotal());
+		}
+		return sum;
+	}
 
 }

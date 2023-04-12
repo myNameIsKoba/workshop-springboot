@@ -95,13 +95,12 @@ public class TestConfig implements CommandLineRunner{
 
 		this.orderIRepos.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 		
-		Order o = new Order();
-		o.setMomento(Instant.now());
-		
-		Long hours = 2L;
-		Instant t1 = o.getMomento();
-		Instant t2 = t1.plus(hours, ChronoUnit.HOURS);
-		Payments pa1 = new Payments(null, t2, o1);
+		Payments pa1 = new Payments(
+				null, 
+				Instant
+					.now()
+					.plus(2L, ChronoUnit.HOURS), 
+				o1);
 		
 		o1.setPagamento(pa1);
 		

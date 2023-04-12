@@ -37,6 +37,10 @@ public class OrderItem {
 		this.id.setProduct(product);
 	}
 	
+	public BigDecimal subTotal() {
+		return BigDecimal.valueOf(quantity).multiply(preco);
+	}
+	
 	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
