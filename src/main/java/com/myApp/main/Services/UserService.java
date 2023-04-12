@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myApp.main.Services.exception.ResourceNotFoundException;
 import com.myApp.main.entities.User;
 import com.myApp.main.repositories.UserRepository;
 
@@ -22,7 +23,7 @@ public class UserService {
 	public User findById(Long id) {
 		Optional<User> obj = repositorio.findById(id);
 		
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public User insert(User user) {

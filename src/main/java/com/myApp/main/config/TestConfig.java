@@ -95,6 +95,7 @@ public class TestConfig implements CommandLineRunner{
 
 		this.orderIRepos.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 		
+		//simulando como se fosse pago 2h depois
 		Payments pa1 = new Payments(
 				null, 
 				Instant
